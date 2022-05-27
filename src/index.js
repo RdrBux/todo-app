@@ -1,6 +1,6 @@
 import { Card } from "./cards";
-import { Project } from "./projects";
-import { buttonConfig } from "./dom";
+import { Project, allProjects } from "./projects";
+import { buttonConfig, addToMain, clearMain } from "./dom";
 
 const project1 = new Project("Proyecto uno");
 
@@ -11,13 +11,15 @@ const card2 = new Card("Comida2", "Comprar comida", 232323, "High");
 project1.addCard(card1);
 project1.addCard(card2);
 
-const main = document.querySelector(".main");
-main.appendChild(project1.displayDOM());
+addToMain(project1);
 
 const btnAddProject = buttonConfig("#js-add-project", () => {
   const projectName = window.prompt("Project name:");
   const project = new Project(projectName);
+  allProjects.push(project);
   project.appendToNav();
+  clearMain();
+  addToMain(project);
 });
 
 const btnRemoveCard = document.querySelectorAll(".card button");
@@ -26,3 +28,8 @@ btnRemoveCard.forEach((btn) =>
     project1.removeCard(btn.classList[1]);
   })
 );
+
+const btnAddCard = document.querySelector("#js-btn-cards");
+btnAddCard.addEventListener("click", () => {
+  console.log("hi");
+});

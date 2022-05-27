@@ -1,3 +1,5 @@
+export const allProjects = [];
+
 export class Project {
   cardlist = [];
 
@@ -45,6 +47,8 @@ export class Project {
     removeBtn.textContent = "x";
     removeBtn.addEventListener("click", () => {
       navProjects.removeChild(liProject);
+      const index = allProjects.findIndex((proj) => proj.name === this.name);
+      allProjects.splice(index, 1);
     });
 
     liProject.appendChild(btn);

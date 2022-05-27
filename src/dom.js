@@ -4,3 +4,17 @@ export function buttonConfig(strOfDomElement, functionToApply) {
     functionToApply();
   });
 }
+
+const main = document.querySelector(".main");
+
+export function addToMain(project) {
+  main.appendChild(project.displayDOM());
+}
+
+export function clearMain() {
+  while (main.firstChild) {
+    main.removeChild(main.lastChild);
+  }
+}
+
+export function displayForm() {}

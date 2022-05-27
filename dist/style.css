@@ -1,5 +1,6 @@
 :root {
   --blue: #0d46af;
+  --blue-darker: #08255a;
   --light-blue: #2294ff;
   --light-blue-darker: #165b9c;
   --light-gray: #e4e4e4;
@@ -84,6 +85,7 @@ nav #js-add-project {
   color: white;
   font-weight: bold;
   font-size: 18px;
+  border-radius: 5px;
 }
 
 nav #js-add-project:hover {
@@ -190,4 +192,19 @@ footer {
 
 .removed {
   display: none;
+}
+
+#js-btn-cards {
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem;
+  margin: 1rem 0;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#js-btn-cards:hover {
+  background-color: var(--blue-darker);
 }
