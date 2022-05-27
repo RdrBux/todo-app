@@ -4,6 +4,7 @@
   --light-blue-darker: #165b9c;
   --light-gray: #e4e4e4;
   --gray: #c5c5c5;
+  --gray-check: #444444;
 }
 
 html {
@@ -94,7 +95,7 @@ nav .js-li-project {
   align-items: center;
 }
 
-nav .remove {
+.remove {
   background-color: red;
   color: white;
   font-weight: bold;
@@ -105,7 +106,7 @@ nav .remove {
   text-align: center;
 }
 
-nav .remove:hover {
+.remove:hover {
   background-color: #a10000;
 }
 
@@ -151,14 +152,42 @@ footer {
   grid-column: 3 / 4;
 }
 
-.card p:nth-child(4) {
-  color: blue;
+.card input {
   grid-row: 1 / 3;
   grid-column: 1 / 2;
+  align-self: center;
+  justify-self: center;
 }
 
-.card p:nth-child(5) {
-  color: red;
+.card button {
   grid-row: 1 / 3;
   grid-column: 4 / 5;
+  font-family: inherit;
+  font-size: inherit;
+  border: none;
+  align-self: center;
+  justify-self: center;
+}
+
+.done {
+  background-color: #eeeeee;
+}
+
+.done h3 {
+  color: var(--gray-check);
+  text-decoration: line-through;
+}
+
+.done p:nth-child(2) {
+  color: var(--gray-check);
+  text-decoration: line-through;
+}
+
+.done p:nth-child(3) {
+  color: var(--gray-check);
+  text-decoration: line-through;
+}
+
+.removed {
+  display: none;
 }

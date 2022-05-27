@@ -6,7 +6,7 @@ const project1 = new Project("Proyecto uno");
 
 const card1 = new Card("Comida", "Comprar comida", 232323, "High");
 
-const card2 = new Card("Comida", "Comprar comida", 232323, "High");
+const card2 = new Card("Comida2", "Comprar comida", 232323, "High");
 
 project1.addCard(card1);
 project1.addCard(card2);
@@ -19,3 +19,10 @@ const btnAddProject = buttonConfig("#js-add-project", () => {
   const project = new Project(projectName);
   project.appendToNav();
 });
+
+const btnRemoveCard = document.querySelectorAll(".card button");
+btnRemoveCard.forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    project1.removeCard(btn.classList[1]);
+  })
+);

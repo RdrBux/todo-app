@@ -19,11 +19,23 @@ export class Card {
     const cardDate = document.createElement("p");
     cardDate.textContent = `Date: ${this.date}`;
 
-    const cardDone = document.createElement("p");
-    cardDone.textContent = `done`;
+    const cardDone = document.createElement("INPUT");
+    cardDone.setAttribute("type", "checkbox");
+    cardDone.addEventListener("change", (e) => {
+      if (e.target.checked) {
+        card.classList.add("done");
+      } else {
+        card.classList.remove("done");
+      }
+    });
 
-    const cardRemove = document.createElement("p");
+    const cardRemove = document.createElement("button");
+    cardRemove.classList.add("remove");
+    cardRemove.classList.add(this.title);
     cardRemove.textContent = `x`;
+    cardRemove.addEventListener("click", () => {
+      card.classList.add("removed");
+    });
 
     card.appendChild(cardTitle);
     card.appendChild(cardDescription);

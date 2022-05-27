@@ -9,8 +9,12 @@ export class Project {
     this.cardlist.push(card);
   }
 
-  removeCard(index) {
-    this.cardlist.splice(index, 1);
+  removeCard(cardTitle) {
+    this.cardlist.forEach((card, index) => {
+      if (card.title === cardTitle) {
+        this.cardlist.splice(index, 1);
+      }
+    });
   }
 
   displayDOM() {
