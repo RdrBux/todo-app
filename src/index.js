@@ -23,9 +23,9 @@ const currentDate =
   ("0" + (today.getMonth() + 1)).slice(-2) +
   "-" +
   ("0" + today.getDate()).slice(-2);
-const card1 = new Card("Comida", "Comprar comida", currentDate, "High");
+const card1 = new Card("Comida 1", "Comprar comida", currentDate, "high");
 
-const card2 = new Card("Comida2", "Comprar comida", currentDate, "High");
+const card2 = new Card("Comida 2", "Comprar más comida", currentDate, "medium");
 
 const project0 = new Project("Default Project");
 allProjects.push(project0);
@@ -73,3 +73,10 @@ form.addEventListener("submit", (e) => {
   clearMain();
   addToMain(projectSelected[0]);
 });
+
+/* const navButtonProjects = document.querySelectorAll(".project-btn");
+navButtonProjects.forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    console.log(btn.textContent);
+  })
+); */

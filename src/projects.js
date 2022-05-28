@@ -1,4 +1,5 @@
 import { Card } from "./cards";
+import { addToMain, clearMain, navSelected } from "./dom";
 
 export const allProjects = [];
 export const projectSelected = [];
@@ -45,6 +46,12 @@ export class Project {
     const btn = document.createElement("button");
     btn.classList.add("project-btn");
     btn.textContent = this.name;
+    btn.addEventListener("click", (e) => {
+      projectSelected[0] = this.name;
+      clearMain();
+      addToMain(this.name);
+      navSelected();
+    });
 
     const removeBtn = document.createElement("button");
     removeBtn.classList = "remove";

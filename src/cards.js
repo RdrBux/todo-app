@@ -31,7 +31,6 @@ export class Card {
 
     const cardRemove = document.createElement("button");
     cardRemove.classList.add("remove");
-    cardRemove.classList.add(this.title);
     cardRemove.textContent = `x`;
     cardRemove.addEventListener("click", () => {
       card.classList.add("removed");
