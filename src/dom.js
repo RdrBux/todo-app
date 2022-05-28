@@ -1,3 +1,5 @@
+import { allProjects, projectSelected } from "./projects";
+
 export function buttonConfig(strOfDomElement, functionToApply) {
   const button = document.querySelector(strOfDomElement);
   button.addEventListener("click", () => {
@@ -9,8 +11,12 @@ export function buttonConfig(strOfDomElement, functionToApply) {
 
 const main = document.querySelector(".main");
 
-export function addToMain(project) {
-  main.appendChild(project.displayDOM());
+export function addToMain(projectName) {
+  allProjects.forEach((proj) => {
+    if (proj.name === projectName) {
+      main.appendChild(proj.displayDOM());
+    }
+  });
 }
 
 export function clearMain() {
@@ -19,27 +25,25 @@ export function clearMain() {
   }
 }
 
+export function navSelected() {
+  const navAllProjects = document.querySelectorAll(".project-btn");
+  navAllProjects.forEach((proj) => {
+    if (proj.textContent === projectSelected[0]) {
+      proj.classList.add("selected");
+    } else {
+      proj.classList.remove("selected");
+    }
+  });
+}
+
 // FORM CONTAINER
-export const form = document.querySelector("#form-container");
+export const formContainer = document.querySelector("#form-container");
+export const form = document.querySelector(".form");
 
 export function displayForm() {
-  form.style.display = "flex";
+  formContainer.style.display = "flex";
 }
 
 export function hideForm() {
-  form.style.display = "none";
-}
-
-export function handleSubmit(e) {
-  e.preventDefault();
-  const formData = new FormData(e.target);
-  const formProps = Object.fromEntries(formData);
-  addBookToLibrary(
-    formProps.author,
-    formProps.title,
-    formProps.pages,
-    formProps.read
-  );
-  form.reset();
-  hideForm();
+  formContainer.style.display = "none";
 }

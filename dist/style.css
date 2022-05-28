@@ -98,6 +98,10 @@ nav .js-li-project {
   align-items: center;
 }
 
+.selected {
+  font-weight: bold;
+}
+
 .remove {
   background-color: red;
   color: white;

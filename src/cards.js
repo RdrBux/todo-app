@@ -6,7 +6,7 @@ export class Card {
     this.priority = priority;
   }
 
-  displayDOM() {
+  displayCARD() {
     const card = document.createElement("div");
     card.classList = "card";
 

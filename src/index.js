@@ -1,25 +1,40 @@
 import { Card } from "./cards";
-import { Project, allProjects } from "./projects";
 import {
+  Project,
+  allProjects,
+  projectSelected,
+  handleSubmit,
+} from "./projects";
+import {
+  formContainer,
   form,
   displayForm,
   hideForm,
   buttonConfig,
   addToMain,
   clearMain,
-  handleSubmit,
+  navSelected,
 } from "./dom";
 
-const project1 = new Project("Proyecto uno");
+const today = new Date();
+const currentDate =
+  today.getFullYear() +
+  "-" +
+  ("0" + (today.getMonth() + 1)).slice(-2) +
+  "-" +
+  ("0" + today.getDate()).slice(-2);
+const card1 = new Card("Comida", "Comprar comida", currentDate, "High");
 
-const card1 = new Card("Comida", "Comprar comida", "232323", "High");
+const card2 = new Card("Comida2", "Comprar comida", currentDate, "High");
 
-const card2 = new Card("Comida2", "Comprar comida", "232323", "High");
-
-project1.addCard(card1);
-project1.addCard(card2);
-
-addToMain(project1);
+const project0 = new Project("Default Project");
+allProjects.push(project0);
+project0.appendToNav();
+project0.addCard(card1);
+project0.addCard(card2);
+addToMain("Default Project");
+projectSelected[0] = project0.name;
+navSelected();
 
 const btnAddProject = buttonConfig("#js-add-project", () => {
   const projectName = window.prompt("Project name:");
@@ -27,13 +42,15 @@ const btnAddProject = buttonConfig("#js-add-project", () => {
   allProjects.push(project);
   project.appendToNav();
   clearMain();
-  addToMain(project);
+  addToMain(project.name);
+  projectSelected[0] = project.name;
+  navSelected();
 });
 
 const btnRemoveCard = document.querySelectorAll(".card button");
 btnRemoveCard.forEach((btn) =>
   btn.addEventListener("click", (e) => {
-    project1.removeCard(btn.classList[1]);
+    project.removeCard(btn.classList[1]);
   })
 );
 
@@ -42,12 +59,17 @@ btnAddCard.addEventListener("click", () => {
   displayForm();
 });
 
-form.addEventListener("click", (e) => {
+formContainer.addEventListener("click", (e) => {
   if (e.target.id !== "form-container") {
     return;
   }
   hideForm();
 });
 
-const form = document.querySelector(".form");
-form.addEventListener("submit", handleSubmit);
+form.addEventListener("submit", (e) => {
+  handleSubmit(e);
+  form.reset();
+  hideForm();
+  clearMain();
+  addToMain(projectSelected[0]);
+});

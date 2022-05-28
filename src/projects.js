@@ -1,4 +1,7 @@
+import { Card } from "./cards";
+
 export const allProjects = [];
+export const projectSelected = [];
 
 export class Project {
   cardlist = [];
@@ -29,7 +32,7 @@ export class Project {
     project.appendChild(projectTitle);
 
     this.cardlist.forEach((card) => {
-      project.appendChild(card.displayDOM());
+      project.appendChild(card.displayCARD());
     });
 
     return project;
@@ -40,6 +43,7 @@ export class Project {
     const liProject = document.createElement("li");
     liProject.classList = "js-li-project";
     const btn = document.createElement("button");
+    btn.classList.add("project-btn");
     btn.textContent = this.name;
 
     const removeBtn = document.createElement("button");
@@ -55,4 +59,21 @@ export class Project {
     liProject.appendChild(removeBtn);
     navProjects.appendChild(liProject);
   }
+}
+
+export function handleSubmit(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+  const formCard = new Card(
+    formProps.title,
+    formProps.description,
+    formProps.date,
+    formProps.priority
+  );
+  allProjects.forEach((project) => {
+    if (project.name === projectSelected[0]) {
+      project.addCard(formCard);
+    }
+  });
 }
