@@ -5,6 +5,8 @@ export function buttonConfig(strOfDomElement, functionToApply) {
   });
 }
 
+// MAIN INTERACTIONS
+
 const main = document.querySelector(".main");
 
 export function addToMain(project) {
@@ -17,4 +19,27 @@ export function clearMain() {
   }
 }
 
-export function displayForm() {}
+// FORM CONTAINER
+export const form = document.querySelector("#form-container");
+
+export function displayForm() {
+  form.style.display = "flex";
+}
+
+export function hideForm() {
+  form.style.display = "none";
+}
+
+export function handleSubmit(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+  addBookToLibrary(
+    formProps.author,
+    formProps.title,
+    formProps.pages,
+    formProps.read
+  );
+  form.reset();
+  hideForm();
+}

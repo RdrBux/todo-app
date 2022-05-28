@@ -1,12 +1,20 @@
 import { Card } from "./cards";
 import { Project, allProjects } from "./projects";
-import { buttonConfig, addToMain, clearMain } from "./dom";
+import {
+  form,
+  displayForm,
+  hideForm,
+  buttonConfig,
+  addToMain,
+  clearMain,
+  handleSubmit,
+} from "./dom";
 
 const project1 = new Project("Proyecto uno");
 
-const card1 = new Card("Comida", "Comprar comida", 232323, "High");
+const card1 = new Card("Comida", "Comprar comida", "232323", "High");
 
-const card2 = new Card("Comida2", "Comprar comida", 232323, "High");
+const card2 = new Card("Comida2", "Comprar comida", "232323", "High");
 
 project1.addCard(card1);
 project1.addCard(card2);
@@ -31,5 +39,15 @@ btnRemoveCard.forEach((btn) =>
 
 const btnAddCard = document.querySelector("#js-btn-cards");
 btnAddCard.addEventListener("click", () => {
-  console.log("hi");
+  displayForm();
 });
+
+form.addEventListener("click", (e) => {
+  if (e.target.id !== "form-container") {
+    return;
+  }
+  hideForm();
+});
+
+const form = document.querySelector(".form");
+form.addEventListener("submit", handleSubmit);

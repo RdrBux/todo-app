@@ -17,7 +17,7 @@ export class Card {
     cardDescription.textContent = this.description;
 
     const cardDate = document.createElement("p");
-    cardDate.textContent = `Date: ${this.date}`;
+    cardDate.textContent = this.date;
 
     const cardDone = document.createElement("INPUT");
     cardDone.setAttribute("type", "checkbox");
