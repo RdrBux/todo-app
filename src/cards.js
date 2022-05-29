@@ -1,3 +1,5 @@
+import { allProjects, Project } from "./projects";
+
 export class Card {
   constructor(title, description, date, priority) {
     this.title = title;
@@ -34,6 +36,9 @@ export class Card {
     cardRemove.textContent = `x`;
     cardRemove.addEventListener("click", () => {
       card.classList.add("removed");
+      allProjects.forEach((proj) => {
+        proj.removeCard(this.title);
+      });
     });
 
     card.appendChild(cardTitle);

@@ -4,6 +4,7 @@ import {
   allProjects,
   projectSelected,
   handleSubmit,
+  displayAllCards,
 } from "./projects";
 import {
   formContainer,
@@ -16,6 +17,7 @@ import {
   navSelected,
 } from "./dom";
 
+/// DEFAULT CARDS
 const today = new Date();
 const currentDate =
   today.getFullYear() +
@@ -32,9 +34,10 @@ allProjects.push(project0);
 project0.appendToNav();
 project0.addCard(card1);
 project0.addCard(card2);
-addToMain("Default Project");
-projectSelected[0] = project0.name;
+projectSelected[0] = "All Projects";
+displayAllCards();
 navSelected();
+///
 
 const btnAddProject = buttonConfig("#js-add-project", () => {
   const projectName = window.prompt("Project name:");
@@ -46,13 +49,6 @@ const btnAddProject = buttonConfig("#js-add-project", () => {
   projectSelected[0] = project.name;
   navSelected();
 });
-
-const btnRemoveCard = document.querySelectorAll(".card button");
-btnRemoveCard.forEach((btn) =>
-  btn.addEventListener("click", (e) => {
-    project.removeCard(btn.classList[1]);
-  })
-);
 
 const btnAddCard = document.querySelector("#js-btn-cards");
 btnAddCard.addEventListener("click", () => {
@@ -71,12 +67,16 @@ form.addEventListener("submit", (e) => {
   form.reset();
   hideForm();
   clearMain();
-  addToMain(projectSelected[0]);
+  if (projectSelected[0] === "All Projects") {
+    displayAllCards();
+  } else {
+    addToMain(projectSelected[0]);
+  }
 });
 
-/* const navButtonProjects = document.querySelectorAll(".project-btn");
-navButtonProjects.forEach((btn) =>
-  btn.addEventListener("click", (e) => {
-    console.log(btn.textContent);
-  })
-); */
+const btnAllProjects = document.querySelector(".all-projects");
+btnAllProjects.addEventListener("click", () => {
+  projectSelected[0] = "All Projects";
+  displayAllCards();
+  navSelected();
+});

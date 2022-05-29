@@ -122,6 +122,10 @@ main {
   padding: 2rem;
 }
 
+main h2 {
+  margin-top: 0;
+}
+
 footer {
   grid-area: foot;
   background-color: var(--blue);

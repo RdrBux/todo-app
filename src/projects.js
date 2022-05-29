@@ -53,17 +53,19 @@ export class Project {
       navSelected();
     });
 
-    const removeBtn = document.createElement("button");
-    removeBtn.classList = "remove";
-    removeBtn.textContent = "x";
-    removeBtn.addEventListener("click", () => {
-      navProjects.removeChild(liProject);
-      const index = allProjects.findIndex((proj) => proj.name === this.name);
-      allProjects.splice(index, 1);
-    });
-
     liProject.appendChild(btn);
-    liProject.appendChild(removeBtn);
+
+    if (this.name !== "Default Project") {
+      const removeBtn = document.createElement("button");
+      removeBtn.classList = "remove";
+      removeBtn.textContent = "x";
+      removeBtn.addEventListener("click", () => {
+        navProjects.removeChild(liProject);
+        const index = allProjects.findIndex((proj) => proj.name === this.name);
+        allProjects.splice(index, 1);
+      });
+      liProject.appendChild(removeBtn);
+    }
     navProjects.appendChild(liProject);
   }
 }
@@ -81,6 +83,28 @@ export function handleSubmit(e) {
   allProjects.forEach((project) => {
     if (project.name === projectSelected[0]) {
       project.addCard(formCard);
+    } else {
+      allProjects[0].addCard(formCard);
     }
   });
+}
+
+const main = document.querySelector(".main");
+
+export function displayAllCards() {
+  const project = document.createElement("div");
+  project.classList = "project";
+
+  const projectTitle = document.createElement("h2");
+  projectTitle.textContent = "All Projects";
+
+  project.appendChild(projectTitle);
+
+  allProjects.forEach((proj) => {
+    proj.cardlist.forEach((card) => {
+      project.appendChild(card.displayCARD());
+    });
+  });
+  clearMain();
+  main.appendChild(project);
 }
