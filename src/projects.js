@@ -63,6 +63,8 @@ export class Project {
         navProjects.removeChild(liProject);
         const index = allProjects.findIndex((proj) => proj.name === this.name);
         allProjects.splice(index, 1);
+        clearMain();
+        displayAllCards();
       });
       liProject.appendChild(removeBtn);
     }
@@ -83,10 +85,11 @@ export function handleSubmit(e) {
   allProjects.forEach((project) => {
     if (project.name === projectSelected[0]) {
       project.addCard(formCard);
-    } else {
-      allProjects[0].addCard(formCard);
     }
   });
+  if (projectSelected[0] === "All Projects") {
+    allProjects[0].addCard(formCard);
+  }
 }
 
 const main = document.querySelector(".main");
@@ -107,4 +110,6 @@ export function displayAllCards() {
   });
   clearMain();
   main.appendChild(project);
+  projectSelected[0] = "All Projects";
+  navSelected();
 }

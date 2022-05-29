@@ -117,6 +117,43 @@ nav .js-li-project {
   background-color: #a10000;
 }
 
+.project-menu {
+  display: flex;
+  align-items: stretch;
+  background-color: var(--gray-check);
+  border: 2px solid var(--gray-dark);
+  padding: 2px 10px;
+  border-radius: 5px;
+}
+
+.project-menu label {
+  display: grid;
+  place-content: center;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: white;
+  margin-right: 5px;
+}
+
+.project-menu input {
+  max-width: 55%;
+  font-size: 1rem;
+  padding-left: 0.25rem;
+}
+
+.project-menu button {
+  background-color: var(--blue);
+  display: grid;
+  place-content: center;
+  border: 0;
+  color: white;
+  font-weight: bold;
+}
+
+.project-menu button:hover {
+  background-color: var(--blue-darker);
+}
+
 main {
   grid-area: main;
   padding: 2rem;

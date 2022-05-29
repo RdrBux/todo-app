@@ -47,3 +47,10 @@ export function displayForm() {
 export function hideForm() {
   formContainer.style.display = "none";
 }
+
+/* export function addProjectMenu() {
+  const projMenu = document.createElement('div');
+  projMenu.classList.add('project-menu');
+
+
+} */
