@@ -6,6 +6,7 @@ export class Card {
     this.description = description;
     this.date = date;
     this.priority = priority;
+    this.done = false;
   }
 
   displayCARD() {
@@ -23,11 +24,19 @@ export class Card {
 
     const cardDone = document.createElement("INPUT");
     cardDone.setAttribute("type", "checkbox");
+
+    if (this.done) {
+      cardDone.setAttribute("checked", "true");
+      card.classList.add("done");
+    }
+
     cardDone.addEventListener("change", (e) => {
       if (e.target.checked) {
         card.classList.add("done");
+        this.done = true;
       } else {
         card.classList.remove("done");
+        this.done = false;
       }
     });
 
