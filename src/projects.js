@@ -70,6 +70,12 @@ export class Project {
     }
     navProjects.appendChild(liProject);
   }
+
+  sortByDate() {
+    this.cardlist.sort(function (a, b) {
+      return new Date(a.date) - new Date(b.date);
+    });
+  }
 }
 
 export function handleSubmit(e) {
@@ -82,13 +88,16 @@ export function handleSubmit(e) {
     formProps.date,
     formProps.priority
   );
+  console.log(typeof formProps.date);
   allProjects.forEach((project) => {
     if (project.name === projectSelected[0]) {
       project.addCard(formCard);
+      project.sortByDate();
     }
   });
   if (projectSelected[0] === "All Projects") {
     allProjects[0].addCard(formCard);
+    allProjects[0].sortByDate();
   }
 }
 
@@ -104,6 +113,7 @@ export function displayAllCards() {
   project.appendChild(projectTitle);
 
   allProjects.forEach((proj) => {
+    proj.sortByDate();
     proj.cardlist.forEach((card) => {
       project.appendChild(card.displayCARD());
     });
