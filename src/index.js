@@ -39,7 +39,27 @@ displayAllCards();
 navSelected();
 ///
 
+const projectMenu = document.querySelector(".project-menu");
+
 const btnAddProject = buttonConfig("#js-add-project", () => {
+  projectMenu.style.display = "flex";
+});
+
+projectMenu.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const formProps = Object.fromEntries(formData);
+  const project = new Project(formProps["proj-title"]);
+  allProjects.push(project);
+  project.appendToNav();
+  clearMain();
+  addToMain(project.name);
+  projectSelected[0] = project.name;
+  navSelected();
+  projectMenu.reset();
+  projectMenu.style.display = "none";
+});
+/* const btnAddProject = buttonConfig("#js-add-project", () => {
   const projectName = window.prompt("Project name:");
   const project = new Project(projectName);
   allProjects.push(project);
@@ -48,7 +68,7 @@ const btnAddProject = buttonConfig("#js-add-project", () => {
   addToMain(project.name);
   projectSelected[0] = project.name;
   navSelected();
-});
+}); */
 
 const btnAddCard = document.querySelector("#js-btn-cards");
 btnAddCard.addEventListener("click", () => {
