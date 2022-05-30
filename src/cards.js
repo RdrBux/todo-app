@@ -1,13 +1,45 @@
 import { allProjects, Project } from "./projects";
 
+// Get dates to apply filter in displayed in left nav
+export function transformDate(date) {
+  date =
+    date.getFullYear() +
+    "-" +
+    ("0" + (date.getMonth() + 1)).slice(-2) +
+    "-" +
+    ("0" + date.getDate()).slice(-2);
+  return date;
+}
+
 const today = new Date();
-const currentDate =
-  today.getFullYear() +
-  "-" +
-  ("0" + (today.getMonth() + 1)).slice(-2) +
-  "-" +
-  ("0" + today.getDate()).slice(-2);
-const dayFilter = "Today";
+const currentDate = transformDate(today);
+const lastDayOfWeek = transformDate(
+  new Date(today.setDate(today.getDate() - today.getDay() + 7))
+);
+
+const thisWeek = [];
+let day = new Date();
+thisWeek.push(transformDate(day));
+let transformedDay = "";
+do {
+  day.setDate(day.getDate() + 1);
+  transformedDay = transformDate(day);
+  thisWeek.push(transformedDay);
+} while (transformedDay !== lastDayOfWeek);
+
+const nextWeek = [];
+const baseDay = new Date();
+const nextWeekDay = new Date(
+  baseDay.setDate(baseDay.getDate() - baseDay.getDay() + 7)
+);
+let transformedNextWeekDay = "";
+for (let i = 0; i < 7; i++) {
+  nextWeekDay.setDate(nextWeekDay.getDate() + 1);
+  transformedNextWeekDay = transformDate(nextWeekDay);
+  nextWeek.push(transformedNextWeekDay);
+}
+
+const dayFilter = "This Week";
 
 export class Card {
   constructor(title, description, date, priority) {
@@ -21,7 +53,9 @@ export class Card {
   displayCARD() {
     if (
       dayFilter === "All time" ||
-      (dayFilter === "Today" && this.date === currentDate)
+      (dayFilter === "Today" && this.date === currentDate) ||
+      (dayFilter === "This Week" && thisWeek.includes(this.date)) ||
+      (dayFilter === "Next Week" && nextWeek.includes(this.date))
     ) {
       const card = document.createElement("div");
       card.classList = "card";

@@ -1,4 +1,4 @@
-import { Card } from "./cards";
+import { Card, transformDate } from "./cards";
 import {
   Project,
   allProjects,
@@ -19,12 +19,8 @@ import {
 
 /// DEFAULT CARDS
 const today = new Date();
-const currentDate =
-  today.getFullYear() +
-  "-" +
-  ("0" + (today.getMonth() + 1)).slice(-2) +
-  "-" +
-  ("0" + today.getDate()).slice(-2);
+const currentDate = transformDate(today);
+
 const card1 = new Card("Comida 1", "Comprar comida", currentDate, "high");
 
 const card2 = new Card("Comida 2", "Comprar más comida", currentDate, "medium");
