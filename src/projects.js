@@ -88,7 +88,6 @@ export function handleSubmit(e) {
     formProps.date,
     formProps.priority
   );
-  console.log(typeof formProps.date);
   allProjects.forEach((project) => {
     if (project.name === projectSelected[0]) {
       project.addCard(formCard);
