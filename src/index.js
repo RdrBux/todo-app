@@ -1,4 +1,4 @@
-import { Card, transformDate } from "./cards";
+import { Card, dayFilter, transformDate } from "./cards";
 import {
   Project,
   allProjects,
@@ -15,6 +15,7 @@ import {
   addToMain,
   clearMain,
   navSelected,
+  filterSelected,
 } from "./dom";
 
 /// DEFAULT CARDS
@@ -55,16 +56,6 @@ projectMenu.addEventListener("submit", (e) => {
   projectMenu.reset();
   projectMenu.style.display = "none";
 });
-/* const btnAddProject = buttonConfig("#js-add-project", () => {
-  const projectName = window.prompt("Project name:");
-  const project = new Project(projectName);
-  allProjects.push(project);
-  project.appendToNav();
-  clearMain();
-  addToMain(project.name);
-  projectSelected[0] = project.name;
-  navSelected();
-}); */
 
 const btnAddCard = document.querySelector("#js-btn-cards");
 btnAddCard.addEventListener("click", () => {
@@ -96,3 +87,17 @@ btnAllProjects.addEventListener("click", () => {
   displayAllCards();
   navSelected();
 });
+
+const btnFilters = document.querySelectorAll(".filter-btn");
+btnFilters.forEach((btn) =>
+  btn.addEventListener("click", (e) => {
+    dayFilter[0] = btn.textContent;
+    filterSelected();
+    clearMain();
+    if (projectSelected[0] === "All Projects") {
+      displayAllCards();
+    } else {
+      addToMain(projectSelected[0]);
+    }
+  })
+);

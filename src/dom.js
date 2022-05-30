@@ -1,3 +1,4 @@
+import { dayFilter } from "./cards";
 import { allProjects, projectSelected } from "./projects";
 
 export function buttonConfig(strOfDomElement, functionToApply) {
@@ -32,6 +33,17 @@ export function navSelected() {
       proj.classList.add("selected");
     } else {
       proj.classList.remove("selected");
+    }
+  });
+}
+
+export function filterSelected() {
+  const navAllFilters = document.querySelectorAll(".filter-btn");
+  navAllFilters.forEach((filter) => {
+    if (filter.textContent === dayFilter[0]) {
+      filter.classList.add("selected");
+    } else {
+      filter.classList.remove("selected");
     }
   });
 }

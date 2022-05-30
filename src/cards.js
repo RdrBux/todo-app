@@ -39,7 +39,7 @@ for (let i = 0; i < 7; i++) {
   nextWeek.push(transformedNextWeekDay);
 }
 
-const dayFilter = "This Week";
+export const dayFilter = ["All time"];
 
 export class Card {
   constructor(title, description, date, priority) {
@@ -52,10 +52,10 @@ export class Card {
 
   displayCARD() {
     if (
-      dayFilter === "All time" ||
-      (dayFilter === "Today" && this.date === currentDate) ||
-      (dayFilter === "This Week" && thisWeek.includes(this.date)) ||
-      (dayFilter === "Next Week" && nextWeek.includes(this.date))
+      dayFilter[0] === "All time" ||
+      (dayFilter[0] === "Today" && this.date === currentDate) ||
+      (dayFilter[0] === "This Week" && thisWeek.includes(this.date)) ||
+      (dayFilter[0] === "Next Week" && nextWeek.includes(this.date))
     ) {
       const card = document.createElement("div");
       card.classList = "card";
@@ -109,15 +109,3 @@ export class Card {
     }
   }
 }
-
-/* export function filterByDate(filter, card) {
-  if (filter === "All time") {
-    card.displayCARD();
-  }
-  if (filter === "Today") {
-    if (new Date(card.date).withoutTime() === new Date(thisDay).withoutTime()) {
-      card.displayCARD();
-    }
-  }
-}
- */
